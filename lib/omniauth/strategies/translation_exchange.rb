@@ -36,15 +36,16 @@ module OmniAuth
     class TranslationExchange < OmniAuth::Strategies::OAuth2
 
       option :client_options, {
-        :site           => 'https://gateway.translationexchange.com',
-        :authorize_url  => '/oauth/authorize',
-        :token_url      => '/oauth/token',
-        :api_url        => 'https://api.translationexchange.com'
+        :site           => 'http://localhost:3000',
+        :authorize_url  => 'http://localhost:3008/oauth/authorize',
+        :token_url      => 'http://localhost:3008/oauth/token'
       }
 
-      option :authorize_params, {
-        
-      }
+      # option :client_options, {
+      #   :site           => 'https://api.translationexchange.com',
+      #   :authorize_url  => 'https://gateway.translationexchange.com/oauth/authorize',
+      #   :token_url      => 'https://gateway.translationexchange.com/oauth/token'
+      # }
 
       option :name, 'translationexchange'
 
@@ -59,16 +60,6 @@ module OmniAuth
         super
       end
 
-      def build_access_token
-        token_params = {
-          :code => request.params['code'],
-          :redirect_uri => callback_url,
-          :client_id => client.id,
-          :client_secret => client.secret
-        }
-        client.get_token(token_params)
-      end
-      
       uid { raw_info['id'] }
       
       info do
@@ -95,7 +86,6 @@ module OmniAuth
         super.tap do |params|
           params.merge!(:display => request.params['display']) if request.params['display']
           params.merge!(:state => request.params['state']) if request.params['state']
-          params[:scope] ||= 'email'
         end
       end
 
