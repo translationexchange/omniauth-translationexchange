@@ -1,5 +1,5 @@
 #--
-# Copyright (c) 2015 Translation Exchange, Inc
+# Copyright (c) 2017 Translation Exchange, Inc
 #
 #  _______                  _       _   _             ______          _
 # |__   __|                | |     | | (_)           |  ____|        | |
@@ -79,7 +79,7 @@ module OmniAuth
       end
       
       def raw_info
-        @raw_info ||= access_token.get('/v1/users/me').parsed
+        @raw_info ||= access_token.get('/v2/users/me').parsed
       end
 
       def authorize_params

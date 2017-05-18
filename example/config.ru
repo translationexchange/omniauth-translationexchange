@@ -25,7 +25,7 @@ end
 use Rack::Session::Cookie
 
 use OmniAuth::Builder do
-  provider :translation_exchange, ENV['APP_ID'], ENV['APP_SECRET'], :scope => SCOPE
+  provider :translationexchange, ENV['APP_ID'], ENV['APP_SECRET'], :scope => SCOPE
 end
 
 run App.new

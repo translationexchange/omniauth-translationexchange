@@ -1,6 +1,6 @@
 # OmniAuth for Translation Exchange
 
-Translation Exchange OAuth2 Strategy for OmniAuth 1.0.
+Translation Exchange OAuth2 Strategy for OmniAuth 1.4.
 
 Supports the OAuth 2.0 server-side. Read the Translation Exchange docs for more details: https://docs.translationexchange.com/
 
