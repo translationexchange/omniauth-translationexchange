@@ -35,17 +35,17 @@ module OmniAuth
   module Strategies
     class TranslationExchange < OmniAuth::Strategies::OAuth2
 
-      option :client_options, {
-        :site           => 'http://localhost:3000',
-        :authorize_url  => 'http://localhost:3008/oauth/authorize',
-        :token_url      => 'http://localhost:3008/oauth/token'
-      }
-
       # option :client_options, {
-      #   :site           => 'https://api.translationexchange.com',
-      #   :authorize_url  => 'https://gateway.translationexchange.com/oauth/authorize',
-      #   :token_url      => 'https://gateway.translationexchange.com/oauth/token'
+      #   :site           => 'http://localhost:3000',
+      #   :authorize_url  => 'http://localhost:3008/oauth/authorize',
+      #   :token_url      => 'http://localhost:3008/oauth/token'
       # }
+
+      option :client_options, {
+        :site           => 'https://api.translationexchange.com',
+        :authorize_url  => 'https://gateway.translationexchange.com/oauth/authorize',
+        :token_url      => 'https://gateway.translationexchange.com/oauth/token'
+      }
 
       option :name, 'translationexchange'
 
@@ -53,18 +53,14 @@ module OmniAuth
         :header_format => 'OAuth %s',
         :param_name => 'access_token'
       }
-      
+
       option :authorize_options, [:scope, :display]
 
-      def request_phase
-        super
-      end
-
-      uid { raw_info['id'] }
+      uid { raw_info['uuid'] }
       
       info do
         prune!({
-          'id'             => raw_info['id'],
+          'id'             => raw_info['uuid'],
           'display_name'   => raw_info['display_name'],
           'first_name'     => raw_info['first_name'],
           'last_name'      => raw_info['last_name'],
@@ -80,6 +76,11 @@ module OmniAuth
       
       def raw_info
         @raw_info ||= access_token.get('/v2/users/me').parsed
+      end
+
+      # fix for the 1.4 and doorkeeper
+      def callback_url
+        full_host + script_name + callback_path
       end
 
       def authorize_params

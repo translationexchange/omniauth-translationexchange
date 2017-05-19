@@ -37,7 +37,10 @@ For example, to request `email` permission and display the authorization page in
  
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :translationexchange, ENV['TRANSLATION_EXCHANGE_KEY'], ENV['TRANSLATION_EXCHANGE_SECRET'], :scope => 'email', :display => 'mobile'
+  provider :translationexchange, ENV['TRANSLATION_EXCHANGE_KEY'], ENV['TRANSLATION_EXCHANGE_SECRET'], { 
+      :scope => 'email', 
+      :display => 'mobile'
+  }
 end
 ```
 
@@ -48,28 +51,39 @@ If you want to set the `display` format on a per-request basis, you can just pas
 Here's an example *Authentication Hash* available in `request.env['omniauth.auth']`:
 
 ```ruby
-{
-  :provider => 'translationexchange',
-  :uid => '123',
-  :info => {
-    :first_name => 'Alex',
-    :last_name => 'Thompson',
-    :email => 'alex@sample.com',
-    :name => 'Alex Thompson'
-  },
-  :credentials => {
-    :token => 'ABCDEF...', 			# OAuth 2.0 access_token
-    :expires_at => 1321747205 	# when the access token expires
-  },
-  :extra => {
-    :user => {
-      :id => '1234567',
-      :name => 'Alex Thompson',
-      :first_name => 'Alex',
-      :last_name => 'Thompson'
-    }
-  }
-}
+{"provider"=>"translationexchange",
+ "uid"=>"4e4885fd-c0ee-47f2-871d-22473a3de08d",
+ "info"=>
+  {"id"=>"4e4885fd-c0ee-47f2-871d-22473a3de08d",
+   "display_name"=>"Alex Peterson",
+   "first_name"=>"Alex",
+   "last_name"=>"Peterson",
+   "email"=>"alex@domain.com",
+   "gender"=>"male",
+   "mugshot"=>
+    "https://gravatar.com/avatar/sdfasdfasdfasdfasdfasdfr34fsdf.png?s=65"},
+ "credentials"=>
+  {"token"=>"0ce884c17c79b74667e773c4c226e9fdc8f94f4c6fe4e7fd7b4558dbbbe62505",
+   "expires_at"=>1495153596,
+   "expires"=>true},
+ "extra"=>
+  {"user"=>
+    {"uuid"=>"4e4885fd-c0ee-47f2-871d-22473a3de08d",
+     "email"=>"alex@domain.com",
+     "role"=>"developer",
+     "display_name"=>"Alex Peterson",
+     "first_name"=>"Alex",
+     "last_name"=>"Peterson",
+     "name"=>"Alex Peterson",
+     "username"=>"alex",
+     "mugshot"=>
+      "https://gravatar.com/avatar/87345b2271259e2eeea3b01142f9af56.png?s=65",
+     "time_zone"=>"Pacific Time (US & Canada)",
+     "gender"=>"male",
+     "created_at"=>"2013-11-21 14:28:45",
+     "updated_at"=>"2017-05-18 15:23:03",
+     "password_set_at"=>"2016-11-28 19:22:39",
+     "last_logged_in_at"=>"2017-05-18 15:23:03"}}}
 ```
 
 The precise information available may depend on the permissions which you request.

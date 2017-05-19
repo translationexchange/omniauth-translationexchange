@@ -9,7 +9,7 @@ def execute(cmd)
 end
 
 def version_file_path
-  './lib/omniauth/translationexchange/version.rb'
+  './lib/omniauth/translation_exchange/version.rb'
 end
 
 def version_file
