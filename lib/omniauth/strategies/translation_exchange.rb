@@ -35,17 +35,17 @@ module OmniAuth
   module Strategies
     class TranslationExchange < OmniAuth::Strategies::OAuth2
 
-      # option :client_options, {
-      #   :site           => 'http://localhost:3000',
-      #   :authorize_url  => 'http://localhost:3008/oauth/authorize',
-      #   :token_url      => 'http://localhost:3008/oauth/token'
-      # }
-
       option :client_options, {
-        :site           => 'https://api.translationexchange.com',
-        :authorize_url  => 'https://gateway.translationexchange.com/oauth/authorize',
-        :token_url      => 'https://gateway.translationexchange.com/oauth/token'
+        :site           => 'http://localhost:3000',
+        :authorize_url  => 'http://localhost:3008/oauth/authorize',
+        :token_url      => 'http://localhost:3008/oauth/token'
       }
+
+      # option :client_options, {
+      #   :site           => 'https://api.translationexchange.com',
+      #   :authorize_url  => 'https://gateway.translationexchange.com/oauth/authorize',
+      #   :token_url      => 'https://gateway.translationexchange.com/oauth/token'
+      # }
 
       option :name, 'translationexchange'
 
